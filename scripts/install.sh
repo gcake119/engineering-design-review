@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-script_source="${BASH_SOURCE[0]:-}"
+script_source="${BASH_SOURCE:-}"
 if [[ -n "${script_source}" ]]; then
   repo_root="$(cd "$(dirname "${script_source}")/.." && pwd)"
 else
