@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+script_source="${BASH_SOURCE[0]:-}"
+if [[ -n "${script_source}" ]]; then
+  repo_root="$(cd "$(dirname "${script_source}")/.." && pwd)"
+else
+  repo_root="$(pwd)"
+fi
 skill_name="engineering-design-review"
 source_dir="${repo_root}/skills/${skill_name}"
 target_root="${CODEX_HOME:-${HOME}/.codex}/skills"
