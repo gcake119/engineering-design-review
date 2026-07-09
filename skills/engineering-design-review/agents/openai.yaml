@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Design Review"
+  short_description: "Find engineering blind spots and discuss design trade-offs."
+  default_prompt: "Review this feature or architecture proposal for unknown unknowns, then guide the design trade-off discussion one question at a time."
