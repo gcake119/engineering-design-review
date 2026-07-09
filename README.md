@@ -46,12 +46,20 @@ The installable Codex skill lives under `skills/engineering-design-review`. The 
 ## 安裝／Install
 
 ```bash
-./scripts/install.sh
+curl -fsSL https://raw.githubusercontent.com/gcake119/engineering-design-review/main/scripts/install.sh | bash
 ```
 
-安裝腳本會把 skill 複製到 `~/.codex/skills/engineering-design-review`，並在替換前備份既有版本。
+安裝腳本會從 GitHub 下載 skill，複製到 `~/.codex/skills/engineering-design-review`，並在替換前備份既有版本。
 
-The installer copies the skill to `~/.codex/skills/engineering-design-review` and backs up an existing installed copy before replacing it.
+The installer downloads the skill from GitHub, copies it to `~/.codex/skills/engineering-design-review`, and backs up an existing installed copy before replacing it.
+
+如果你已經 clone 這個 repo，也可以在 repo root 執行：
+
+If you have already cloned this repo, you can also run this from the repo root:
+
+```bash
+./scripts/install.sh
+```
 
 安裝後請重啟 Codex，讓 Codex 重新載入 skill。
 

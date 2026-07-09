@@ -6,10 +6,32 @@ skill_name="engineering-design-review"
 source_dir="${repo_root}/skills/${skill_name}"
 target_root="${CODEX_HOME:-${HOME}/.codex}/skills"
 target_dir="${target_root}/${skill_name}"
+repo_url="https://github.com/gcake119/engineering-design-review"
+archive_url="${repo_url}/archive/refs/heads/main.tar.gz"
+tmp_dir=""
 
 if [[ ! -d "${source_dir}" ]]; then
-  echo "Skill source not found: ${source_dir}" >&2
-  exit 1
+  if ! command -v curl >/dev/null 2>&1; then
+    echo "curl is required for remote installation." >&2
+    exit 1
+  fi
+
+  if ! command -v tar >/dev/null 2>&1; then
+    echo "tar is required for remote installation." >&2
+    exit 1
+  fi
+
+  tmp_dir="$(mktemp -d)"
+  trap '[[ -n "${tmp_dir}" ]] && rm -rf "${tmp_dir}"' EXIT
+
+  echo "Downloading ${repo_url}..."
+  curl -fsSL "${archive_url}" | tar -xz -C "${tmp_dir}"
+  source_dir="${tmp_dir}/engineering-design-review-main/skills/${skill_name}"
+
+  if [[ ! -d "${source_dir}" ]]; then
+    echo "Skill source not found after download: ${source_dir}" >&2
+    exit 1
+  fi
 fi
 
 mkdir -p "${target_root}"
