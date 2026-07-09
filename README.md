@@ -46,7 +46,7 @@ The installable Codex skill lives under `skills/engineering-design-review`. The 
 ## 安裝／Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gcake119/engineering-design-review/main/scripts/install.sh | bash
+curl -fsSL https://cdn.jsdelivr.net/gh/gcake119/engineering-design-review@main/scripts/install.sh | bash
 ```
 
 安裝腳本會從 GitHub 下載 skill，複製到 `~/.codex/skills/engineering-design-review`，並在替換前備份既有版本。
