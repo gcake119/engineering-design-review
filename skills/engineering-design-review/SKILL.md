@@ -1,6 +1,6 @@
 ---
 name: engineering-design-review
-description: Review feature proposals, workflows, architecture changes, APIs, webhooks, data sync, reporting, AI agent workflows, caching, releases, and migrations for engineering blind spots and unknown unknowns. Use when the user asks to find hidden risks, discuss design considerations, compare engineering trade-offs, review a plan before implementation, or turn blind spots into decisions, acceptance criteria, tests, Spectra tasks, or ADR notes.
+description: Review feature proposals, workflows, architecture changes, APIs, webhooks, data sync, reporting, AI agent workflows, caching, releases, migrations, implementation strategy, language/runtime adoption, full rewrites, module extraction, and sidecar/worker strategy for engineering blind spots and unknown unknowns. Use when the user asks to find hidden risks, discuss design considerations, compare engineering trade-offs, review a plan before implementation, evaluate Rust/Go/Python/TypeScript migration, or turn blind spots into decisions, acceptance criteria, tests, Spectra tasks, or ADR notes.
 ---
 
 # Engineering Design Review
@@ -19,7 +19,7 @@ If the user does not specify a mode, scan first, then propose the highest-impact
 
 ## Workflow
 
-1. Classify the work type: API, webhook, data sync, reporting, AI agent workflow, frontend state, cache, release, migration, security-sensitive surface, or other.
+1. Classify the work type: API, webhook, data sync, reporting, AI agent workflow, frontend state, cache, release, migration, implementation strategy, rewrite, runtime migration, language adoption, module extraction, sidecar/worker, security-sensitive surface, or other.
 2. Identify boundaries: callers, callees, source of truth, external systems, side effects, state owners, and user-visible failure points.
 3. Run the blind-spot scan using the categories below. If an important risk does not fit, mark it as `unclassified` and explore it instead of forcing it into a category.
 4. Prioritize findings by risk, reversibility, implementation cost, and product impact.
@@ -55,10 +55,11 @@ Use these categories as prompts, not as a rigid checklist or closed taxonomy.
 8. Test isolation: global state, mocks, cache, database fixtures, fake timers, queues, and parallel test pollution.
 9. Build and generated artifacts: migrations, generated types, schema clients, bundles, Docker layers, and release packages.
 10. Migration path: old users, old data, old settings, old API clients, rollback, and compatibility window.
+11. Implementation strategy: current pain, product stage, language/runtime fit, rewrite vs extraction, contract maturity, equivalence tests, rollout path, rollback, and long-term maintainability.
 
 ## Unclassified Blind Spots
 
-When a meaningful risk does not fit the ten categories, treat it as an unclassified blind spot.
+When a meaningful risk does not fit the categories above, treat it as an unclassified blind spot.
 
 1. Do not force the risk into the closest existing category.
 2. Explain why the current taxonomy does not cover it well.
@@ -83,6 +84,7 @@ Use exploratory questions such as:
 - For AI agent workflows, emphasize tool contracts, side effects, cost bounds, recovery, human confirmation points, and auditability.
 - For frontend state, emphasize lifecycle, stale request handling, loading/error/empty states, accessibility, and edit-state correctness.
 - For releases and migrations, emphasize generated artifacts, install/upgrade paths, data migration, backward compatibility, and rollback.
+- For implementation strategy, rewrites, language adoption, runtime migration, or module extraction, emphasize the mature domain first: rewrite feasibility assessment, strangler fig migration, compatibility contracts, golden tests, shadow mode, canary rollout, rollback, and maintenance cost. Compare full rewrite, incremental migration, specialized component extraction, sidecar/worker, and staying on the current stack. Do not recommend a rewrite until the current pain, contract maturity, test coverage, operational rollout, and team maintainability justify it.
 - For security-sensitive work, suggest pairing this review with a security-specific review.
 
 ## Output Formats
@@ -154,6 +156,56 @@ One-off concern | Existing category variant | Candidate new category
 
 ### One Question
 ...
+```
+
+### Implementation Strategy Output
+
+```md
+## Implementation Strategy Review
+
+### Current Pain
+- Primary pain:
+- Problem type:
+
+### Mature Domain
+- Domain:
+- Common terms:
+- Mainstream patterns:
+
+### Options
+1. Stay on current stack:
+2. Refactor within current stack:
+3. Extract specialized component:
+4. Add sidecar/worker:
+5. Incremental migration:
+6. Full rewrite:
+
+### Contract Readiness
+- Format contract:
+- Behavioral contract:
+- Golden tests:
+- Edge-case matrix:
+- Compatibility tests:
+- Performance baseline:
+
+### Recommendation
+- Recommended path:
+- Why this fits the current stage:
+- What not to rewrite yet:
+
+### Acceptance Criteria
+- ...
+
+### Suggested Tests
+- ...
+
+### Rollout And Rollback
+- Rollout:
+- Rollback:
+- Observability:
+
+### Deferred Risks
+- ...
 ```
 
 ### Decision Output
