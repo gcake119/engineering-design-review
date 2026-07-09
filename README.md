@@ -65,6 +65,29 @@ If you have already cloned this repo, you can also run this from the repo root:
 
 Restart Codex after installation so the skill is discovered.
 
+## 其他 Agent 支援／Other Agent Support
+
+本專案目前是 Codex-first：只有 `skills/engineering-design-review` 是正式維護與測試的版本。
+
+The project is currently Codex-first: only `skills/engineering-design-review` is actively maintained and tested.
+
+這套工程設計審查方法本身是 agent-portable。其他 agent 的 prompt、rules、workflow 或 adapter 歡迎透過 PR 貢獻。
+
+The review framework itself is agent-portable. Prompts, rules, workflows, or adapters for other agents are welcome via PRs.
+
+如果你要新增其他 agent 支援，請在 PR 中包含：
+
+If you add support for another agent, please include:
+
+- adapter 放置位置與使用方式。
+- Where the adapter lives and how to use it.
+- 該 agent 的實際驗證方式。
+- How you verified it with that agent.
+- 至少一個可重現的使用範例。
+- At least one reproducible usage example.
+- 如果尚未完整支援，請明確標註限制。
+- Any known limitations if support is partial.
+
 ## 使用範例／Example Prompts
 
 ```txt
