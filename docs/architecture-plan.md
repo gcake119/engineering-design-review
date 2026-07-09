@@ -15,6 +15,7 @@ It is not a general code review tool, security scanner, or architecture decision
 5. Explain mature engineering domains and terms before recommending custom design.
 6. Convert design discussion into acceptance criteria, tests, or decision notes.
 7. Avoid pretending that all blind spots have equal risk.
+8. Treat the blind-spot taxonomy as a starting set of prompts, not as a closed checklist.
 
 ## Skill Modes
 
@@ -34,6 +35,20 @@ It is not a general code review tool, security scanner, or architecture decision
 - Test isolation
 - Build and generated artifacts
 - Migration and compatibility paths
+
+## Taxonomy Evolution
+
+The initial ten review axes should help reviewers notice common blind spots, but they should not prevent discovery outside the list.
+
+When a risk does not fit the current axes, the skill should:
+
+1. Mark it as unclassified.
+2. Explore the system boundary, product consequence, reversibility, validation gap, and operational impact.
+3. Identify the mature engineering or product domain, if one exists.
+4. Ask one exploratory question at a time.
+5. Decide whether the risk is a one-off concern, a variant of an existing axis, or a candidate for a new taxonomy category.
+
+Add a new review axis only when the risk recurs across contexts, requires distinct review questions, and materially changes design decisions or acceptance criteria.
 
 ## Initial Scope
 

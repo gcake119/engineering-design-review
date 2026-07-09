@@ -21,7 +21,7 @@ If the user does not specify a mode, scan first, then propose the highest-impact
 
 1. Classify the work type: API, webhook, data sync, reporting, AI agent workflow, frontend state, cache, release, migration, security-sensitive surface, or other.
 2. Identify boundaries: callers, callees, source of truth, external systems, side effects, state owners, and user-visible failure points.
-3. Run the blind-spot scan using the categories below.
+3. Run the blind-spot scan using the categories below. If an important risk does not fit, mark it as `unclassified` and explore it instead of forcing it into a category.
 4. Prioritize findings by risk, reversibility, implementation cost, and product impact.
 5. For discussion, explain the mature engineering domain and common terminology before comparing options.
 6. Compare only the options relevant to the current decision.
@@ -43,7 +43,7 @@ In `discuss` mode, use progressive clarification by default.
 
 ## Blind-Spot Categories
 
-Use these categories as prompts, not as a rigid checklist.
+Use these categories as prompts, not as a rigid checklist or closed taxonomy.
 
 1. Boundary contract: success, failure, timeout, retry, cancellation, versioning, idempotency, and ownership.
 2. Lifecycle: trigger, refresh, cancellation, reentry, stale request handling, and state transitions.
@@ -55,6 +55,26 @@ Use these categories as prompts, not as a rigid checklist.
 8. Test isolation: global state, mocks, cache, database fixtures, fake timers, queues, and parallel test pollution.
 9. Build and generated artifacts: migrations, generated types, schema clients, bundles, Docker layers, and release packages.
 10. Migration path: old users, old data, old settings, old API clients, rollback, and compatibility window.
+
+## Unclassified Blind Spots
+
+When a meaningful risk does not fit the ten categories, treat it as an unclassified blind spot.
+
+1. Do not force the risk into the closest existing category.
+2. Explain why the current taxonomy does not cover it well.
+3. Identify the mature engineering or product domain, if one exists.
+4. Explore system boundaries, product consequences, reversibility, validation gaps, and operational impact.
+5. Ask one exploratory question at a time.
+6. Decide whether the risk is a one-off project concern, a variant of an existing category, or a candidate for a new category.
+7. Recommend adding a new category only when the risk recurs across contexts, has distinct review questions, and materially changes design decisions or acceptance criteria.
+
+Use exploratory questions such as:
+
+- What new role, boundary, or state owner appears in this feature?
+- Which assumption is currently unvalidated?
+- Which failure mode would confuse users, operators, or maintainers the most?
+- Which decision would be expensive to reverse later?
+- Which mature engineering or product domain already has terminology for this risk?
 
 ## Domain Routing
 
@@ -106,6 +126,31 @@ Use these categories as prompts, not as a rigid checklist.
 
 ### Provisional Recommendation
 ...
+
+### One Question
+...
+```
+
+### Unclassified Output
+
+```md
+## Unclassified Blind Spot: <name>
+
+### Why Existing Categories Do Not Fit
+...
+
+### Possible Mature Domain
+...
+
+### Exploration Notes
+- Boundary:
+- Product consequence:
+- Reversibility:
+- Validation gap:
+- Operational impact:
+
+### Taxonomy Decision
+One-off concern | Existing category variant | Candidate new category
 
 ### One Question
 ...
