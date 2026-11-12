@@ -2,7 +2,7 @@
 
 ## Positioning
 
-This repository packages a reusable Codex skill for engineering design review. The skill focuses on blind-spot discovery and trade-off discussion before or during implementation.
+This repository packages a reusable Codex skill for engineering design review. The skill focuses on blind-spot discovery and trade-off discussion before or during implementation. Requirement evidence now informs engineering investment within that same review, without turning the skill into a full product-management or user-research tool.
 
 It is not a general code review tool, security scanner, or architecture decision generator. It complements those workflows by helping the user notice hidden engineering risks and make deliberate choices.
 
@@ -23,6 +23,20 @@ It is not a general code review tool, security scanner, or architecture decision
 - `discuss`: discuss one blind spot at a time and compare relevant trade-offs.
 - `decide`: summarize the chosen approach and produce follow-up artifacts.
 
+## Requirement-Sensitive Routing
+
+The existing first-principles workflow remains the entry point. For feature-led proposals, uncertain business rules, new work practices, or unavailable user feedback, SKILL.md routes to `references/requirement-validation.md` inside the installable skill. The reference supplies backward reasoning, evidence/status distinctions, validation selection, and engineering investment boundaries without duplicating the engineering taxonomy or adding another mode.
+
+- scan surfaces material requirement uncertainty alongside technical blind spots.
+- discuss keeps one high-impact question at a time.
+- decide records supported, conditional, and deferred decisions; missing feedback is never confirmation.
+
+Observed facts, explicit requests, developer/AI inferences, and unvalidated business assumptions are separate evidence kinds. Confirmation status is a separate judgment: confirmed, pending validation, or major unresolved, with source, scope, and decision impact. Product usefulness and engineering correctness require separate evidence.
+
+Validation depth depends on uncertainty, consequence, existing evidence, and reversibility. Prototypes are optional; an existing product can provide realistic task validation. Confirmed local fixes and purely technical reviews retain the short engineering path. User unavailability limits affected commitments rather than halting independent work.
+
+The installer copies the whole skill directory, so the reference ships without installer changes. UI metadata and automatic invocation remain unchanged. This is a document-only change: no new runtime dependencies, CI gates, research tooling, or installation side effects.
+
 ## Core Review Axes
 
 - Boundary contracts
@@ -35,10 +49,11 @@ It is not a general code review tool, security scanner, or architecture decision
 - Test isolation
 - Build and generated artifacts
 - Migration and compatibility paths
+- Implementation strategy
 
 ## Taxonomy Evolution
 
-The initial ten review axes should help reviewers notice common blind spots, but they should not prevent discovery outside the list.
+The review axes should help reviewers notice common blind spots, but they should not prevent discovery outside the list.
 
 When a risk does not fit the current axes, the skill should:
 
@@ -83,4 +98,6 @@ Use the official skill validator:
 python3 /Users/caiyijun/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/engineering-design-review
 ```
 
-Forward-test with realistic prompts after the first installed version is usable.
+Forward-test with realistic prompts, checking observable responses rather than matching headings or source strings. The requirement-discovery regression scenarios and reviewed results are recorded in `docs/requirement-validation-scenarios.md`. These are synthetic agent behavior checks, not evidence from real business users. Keep them separate from format validation.
+
+For packaging changes or new bundled references, use the existing installer with a temporary `CODEX_HOME` and confirm that the installed reference can be read through the SKILL.md link; never overwrite the active user installation for a PR test.

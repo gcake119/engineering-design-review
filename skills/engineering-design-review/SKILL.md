@@ -28,6 +28,16 @@ Use first principles to build the analysis: start from the required outcome, ver
 - Derive the simplest sufficient options, including retaining or improving the current approach when relevant. Compare them against the same outcomes, constraints, lifecycle costs, and reversibility.
 - State what evidence would change the recommendation and suggest the lowest-cost sufficient validation for critical unknowns. Scale depth to the decision; do not invent precision or require exhaustive analysis for small questions.
 
+## Requirement Evidence And Engineering Investment
+
+For feature-led proposals, new workflows, uncertain business rules, or missing user feedback, read [Requirement discovery and validation](references/requirement-validation.md). Extend first-principles analysis by working backward from **proposed feature → work problem → evidence of usefulness**, without rejecting the feature as a starting point or asking all discovery questions at once.
+
+- Keep observed facts, explicit user requests, developer/AI inferences, and unvalidated business assumptions distinct. A request confirms what was asked for, not that the proposed solution is useful or every implied rule is approved.
+- Mark consequential requirements as confirmed, pending validation, or major unresolved, with evidence/source, scope, and decision impact. Neither silence nor passing automated tests is sufficient to promote a requirement to confirmed.
+- Distinguish product validation (does this help real work?) from engineering verification (does the system meet its specification?). Choose validation depth by uncertainty, consequence, evidence, and reversibility; prototypes are optional. Reuse an existing product for realistic task validation when suitable.
+- Recommend the engineering scope justified by the evidence: proceed with confirmed or independent reversible work, bound exploratory work, and defer commitments that depend on major unresolved requirements. Do not freeze all development while waiting for users.
+- For confirmed local fixes or purely technical contract reviews, use a brief relevance check and continue the existing engineering review; do not require interviews, prototypes, or a requirement-status table without a material need.
+
 ## Pyramid-Principle Reporting
 
 Present the report using the pyramid principle: lead with the answer, organize supporting reasons underneath it, and place evidence and detail below each reason. The analysis may proceed bottom-up; the delivered report should be conclusion-first.
@@ -48,7 +58,7 @@ Present the report using the pyramid principle: lead with the answer, organize s
 6. Compare only the options relevant to the current decision.
 7. Recommend a path based on the project stage: prototype, MVP, internal pilot, production, multi-tenant production, or regulated/high-trust workflow.
 8. Convert the decision into acceptance criteria, tests, Spectra tasks, ADR notes, or implementation notes when useful.
-9. Present the findings using pyramid-principle reporting, with a conclusion appropriate to the current mode and evidence strength.
+9. Present the findings using pyramid-principle reporting, with a conclusion appropriate to the current mode and evidence strength. For requirement-sensitive work, include evidence/status, separate product and engineering validation, and state what can proceed versus what depends on confirmation; omit these fields when irrelevant.
 
 ## Discussion Style
 
@@ -269,6 +279,7 @@ One-off concern | Existing category variant | Candidate new category
 - Why this fits the current stage:
 - Alternatives rejected and trade-offs:
 - Key evidence, assumptions, and remaining uncertainty:
+- Requirement status, product validation, and engineering scope (when relevant):
 - Acceptance criteria:
 - Suggested tests:
 - Documentation updates:
