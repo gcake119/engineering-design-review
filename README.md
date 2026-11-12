@@ -27,6 +27,20 @@ Clarify the problem, uncover blind spots, explore proven approaches, then explai
 
 By default, start with a blind-spot scan (`scan`), then discuss options (`discuss`), and converge on a decision once constraints are clear (`decide`). The skill supports design judgment alongside code review, security review, and actual tests.
 
+## 從功能構想到投入決策／From Feature Idea To Investment
+
+可以從「我想做某個功能」開始。Skill 會往回確認三件事：**想到什麼功能 → 要解決誰的工作問題 → 怎麼知道真的有用**。它會分清楚觀察到的事實、使用者明確要求、開發者／AI 推論與尚未驗證的業務假設，並標示重要需求是已確認、待驗證或重大未決。
+
+Start with a feature idea. The skill works backward: **proposed feature → whose work problem it solves → how to test usefulness**. It separates observed facts, explicit requests, developer/AI inferences, and business assumptions, then marks consequential requirements as confirmed, pending validation, or major unresolved.
+
+例如「透過 LINE 自行改期」，不代表個案一定需要全自助流程。可以先確認現在怎麼改期、卡在哪裡，再選擇訪談、畫面、互動原型或小規模試用。已有產品就優先拿現有產品驗證；已確認的日期格式修正或純工程契約審查，可直接進入工程設計，不必重走訪談與原型。
+
+A LINE self-rescheduling idea does not establish demand for a fully self-service workflow. Examine current work first, then choose a conversation, screen, interactive prototype, or small pilot. Reuse an existing product for validation; confirmed local fixes and technical contract reviews can proceed directly to engineering design.
+
+**產品驗證**看是否幫助真實工作；**工程驗證**看系統是否符合規格，兩者不能互相取代。承辦人沒回覆不等於同意：可以繼續已確認或容易回復的工作，把依賴重大未決需求的高成本實作留待確認。
+
+**Product validation** checks real-work usefulness; **engineering verification** checks conformance to specifications. Neither replaces the other. Silence is not approval: continue confirmed or reversible work, while deferring costly commitments that depend on major unresolved requirements.
+
 ## Repo 結構／Repository Shape
 
 ```txt
@@ -106,4 +120,16 @@ Use engineering-design-review in discuss mode. Ask one question at a time while 
 
 ```txt
 Use engineering-design-review to turn this reporting design decision into acceptance criteria and tests.
+```
+
+```txt
+用 engineering-design-review 掃描：我想讓個案透過 LINE OA 自行改期。請區分已知與假設，建議最小驗證及可以先做的工程範圍。
+```
+
+```txt
+用 engineering-design-review 討論每日工作台與逾期提醒。承辦人暫時無法回饋，請一次釐清一個最影響決策的問題。
+```
+
+```txt
+主要 SaaS 功能已完成但還沒有真實試用者。請用 engineering-design-review 判斷如何利用現有產品驗證需求。
 ```
